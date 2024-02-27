@@ -2,31 +2,24 @@ import numpy as np
 import os
 
 class sandbox():
-    def train(bets, ssp, asp):
+    def train(bets: int, model_0: list, ans: list):  # Added self as the first argument
         for bet in range(bets):
-            a = np.random.choice(asp)
+            a = np.random.choice(ans)
+            s_0 = np.random.choice(model_0)
 
-            s0 = np.random.choice(ssp)
-            s1 = np.random.choice(ssp)
-            s2 = np.random.choice(ssp)
-
-            if a == s0:
-                asp.append(s0)
-            elif a == s1:
-                asp.append(s1)
-            elif a == s2:
-                asp.append(s2)
+            if a == s_0:
+                model_0.append(s_0)
 
             print("TRAINING", (bet / bets) * 100, "%")
 
         print("TRAINING ENDED")
-        return asp
+        return model_0
 
-    def test(trained_model: list, attempts: int, asp: list):
+    def test(trained_model: list, attempts: int, ans: list):
         score = 0
         for attempt in range(attempts):
-            a = np.random.choice(trained_model)
-            s = np.random.choice(asp)
+            a = np.random.choice(ans)
+            s = np.random.choice(trained_model)
 
             if a == s:
                 score += 1
@@ -34,18 +27,17 @@ class sandbox():
             print("TESTING", (attempt / attempts) * 100, "%")
 
         print("TESTING ENDED")
-
         return score
 
     def run():
-        asp = [0, 1]
+        ans = [0, 1]
+        # 1 - 80%   0 - 20%
+        model_0 = [1, 1, 1, 1, 0]
+        bets = 80_000
+        trained_model = sandbox.train(bets, model_0, ans)
 
-        ssp = [1, 1, 1, 1, 0]
-        bets = 50_000
-        trained_model = sandbox.train(bets, ssp, asp)
-
-        attempts = 5_000
-        results = sandbox.test(trained_model, attempts, asp)
+        attempts = 150_000
+        results = sandbox.test(trained_model, attempts, ans)
 
         print("ACCURACY", (results / attempts) * 100, "%" )
 
