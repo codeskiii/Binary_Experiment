@@ -1,3 +1,3 @@
-# Binary_Experiment
+# experiment
 
 Just exploring the world idk
