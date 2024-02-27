@@ -30,9 +30,9 @@ class sandbox():
         return score
 
     def run():
-        ans = [0, 1]
+        model_0 = [0, 1]
         # 1 - 80%   0 - 20%
-        model_0 = [1, 1, 1, 1, 0]
+        ans = [1, 1, 1, 1, 0]
         bets = 80_000
         trained_model = sandbox.train(bets, model_0, ans)
 
