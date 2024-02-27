@@ -5,10 +5,11 @@ class sandbox():
     def train(bets: int, model_0: list, ans: list):  # Added self as the first argument
         for bet in range(bets):
             a = np.random.choice(ans)
-            s_0 = np.random.choice(model_0)
 
-            if a == s_0:
-                model_0.append(s_0)
+            if a == 1:
+                model_0.append(1)
+            elif a == 0:
+                model_0.append(0)
 
             print("TRAINING", (bet / bets) * 100, "%")
 
@@ -31,12 +32,12 @@ class sandbox():
 
     def run():
         model_0 = [0, 1]
-        # 1 - 80%   0 - 20%
-        ans = [1, 1, 1, 1, 0]
-        bets = 80_000
+        # 1 - 2/3   0 - 1/3
+        ans = [1, 1, 0, 0, 0]
+        bets = 100_000
         trained_model = sandbox.train(bets, model_0, ans)
 
-        attempts = 150_000
+        attempts = 25_000
         results = sandbox.test(trained_model, attempts, ans)
 
         print("ACCURACY", (results / attempts) * 100, "%" )
